@@ -5,6 +5,9 @@ import PackageDescription
 let package = Package(
     name: "Sweeter",
     products: [
+        .executable(
+            name: "sweeter",
+            targets: ["sweeter"]),
         .library(
             name: "SweeterKit",
             targets: ["SweeterKit"])
