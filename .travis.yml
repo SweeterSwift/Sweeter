@@ -13,7 +13,7 @@ before_deploy:
   - mkdir -p "$DIST_FOLDER_NAME"
   - cp LICENSE "$DIST_FOLDER_NAME/LICENSE"
   - cp ./.build/x86_64-apple-macosx/release/sweeter "$DIST_FOLDER_NAME/sweeter"
-  - zip -r "$DIST_FOLDER_NAME".zip "$DIST_FOLDER_NAME"
+  - zip -rj "$DIST_FOLDER_NAME".zip "$DIST_FOLDER_NAME"
 deploy:
   provider: releases
   api_key: $GITHUB_OAUTH_TOKEN
