@@ -1,0 +1,23 @@
+cache:
+  directories:
+    - .build/checkouts
+    - .build/repositories
+os: osx
+language: objective-c
+osx_image: xcode10.2
+script:
+  - swift test
+before_deploy:
+  - swift build -c release
+  - DIST_FOLDER_NAME="sweeter-$TRAVIS_TAG-dist"
+  - mkdir -p "$DIST_FOLDER_NAME"
+  - cp LICENSE "$DIST_FOLDER_NAME/LICENSE"
+  - cp ./.build/x86_64-apple-macosx/release/sweeter "$DIST_FOLDER_NAME/sweeter"
+  - zip -r "$DIST_FOLDER_NAME".zip "$DIST_FOLDER_NAME"
+deploy:
+  provider: releases
+  api_key: $GITHUB_OAUTH_TOKEN
+  file: "$DIST_FOLDER_NAME.zip"
+  skip_cleanup: true
+  on:
+    tags: true
